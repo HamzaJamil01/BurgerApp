@@ -3,7 +3,13 @@ import './Footer.css';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import Modal from './Modal';
-const Footer = ({ total, onTotalChange, items, setItems, isLoggedIn }) => {
+import { useSelector, useDispatch } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { actionCreators } from '../States/index';
+const Footer = ({ items, setItems, isLoggedIn }) => {
+    const dispatch = useDispatch();
+    const action = bindActionCreators(actionCreators, dispatch)
+    const total = useSelector (state => state.total)
     const [showModal, setShowModal] = useState(false);
     const navigate = useNavigate();
     function handleClick(){
@@ -32,7 +38,7 @@ const Footer = ({ total, onTotalChange, items, setItems, isLoggedIn }) => {
 
     updatedItems[item]++;
     setItems(updatedItems);
-    onTotalChange(total + priceToAdd);
+    action.increaseTotal(priceToAdd);
   };
 
   const handleLess = (item) => {
@@ -59,7 +65,7 @@ const Footer = ({ total, onTotalChange, items, setItems, isLoggedIn }) => {
     if (updatedItems[item] > 0) {
       updatedItems[item]--;
       setItems(updatedItems);
-      onTotalChange(total - priceToSubtract);
+      action.decreaseTotal(priceToSubtract);
     }
   };
   const handleOrderNow = () => {
@@ -75,7 +81,7 @@ const Footer = ({ total, onTotalChange, items, setItems, isLoggedIn }) => {
     <footer className="footer">
       <div className="footer-content">
         <div className="footer-section">
-          <p>Current Price: <b>${total.toFixed(2)}</b></p>
+          <p>Current Price: <b>${total}</b></p>
         </div>
         <div className="footer-section">
           <h3>Lettuce</h3>
@@ -104,7 +110,7 @@ const Footer = ({ total, onTotalChange, items, setItems, isLoggedIn }) => {
                 <button className="signup-btn"disabled={items['lettuce'] === 0 && items['bacon'] === 0 && items['cheese'] === 0 && items['meat'] === 0 } onClick={handleClick}>Signup to Order</button>
             }
         </div>
-        <Modal show={showModal} handleClose={handleCloseModal} handleContinue={handleContinue} items={items} total={total}/>
+        <Modal show={showModal} handleClose={handleCloseModal} handleContinue={handleContinue} items={items} />
       </div>
     </footer>
   );

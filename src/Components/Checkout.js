@@ -4,10 +4,14 @@ import './Checkout.css'
 import { useState } from 'react';
 import OrderForm from './OrderForm';
 import { useNavigate } from 'react-router-dom';
-
-export default function Checkout({items, total, setTotal, setItems}) {
+import { useDispatch } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { actionCreators } from '../States/index';
+export default function Checkout({items, setItems}) {
     const [ContinueButton, setContinueButton] = useState(false);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const action = bindActionCreators(actionCreators, dispatch)
     const handleContinue = () => {
         setContinueButton(true);
       };
@@ -18,7 +22,7 @@ export default function Checkout({items, total, setTotal, setItems}) {
             cheese: 0,
             meat: 0,
           });
-          setTotal(3);
+          action.resetTotal(3);
           navigate('/');
       };
   return (
@@ -26,12 +30,12 @@ export default function Checkout({items, total, setTotal, setItems}) {
         <div className='text-div'>
             <h1>We hope it tastes well!</h1>
         </div>
-        <Burger total={total} setTotal={setTotal} items={items} setItems={setItems}/>
+        <Burger items={items}/>
         <div className='buttons-container'>
             <button className='cancel-btn' onClick={handleCancel}>Cancel</button>
             <button className='continue-btn' onClick={handleContinue}>Continue</button>
         </div>
-        {ContinueButton && <OrderForm total={total} setTotal={setTotal} items={items} setItems={setItems}/>} {}
+        {ContinueButton && <OrderForm items={items} setItems={setItems}/>} {}
     </div>
   )
 }

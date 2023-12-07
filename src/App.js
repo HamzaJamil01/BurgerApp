@@ -13,7 +13,6 @@ import Checkout from './Components/Checkout';
 import Orders from './Components/Orders';
 
 function App() {
-  const [total, setTotal] = useState(3);
   const [items, setItems] = useState({
     lettuce: 0,
     bacon: 0,
@@ -26,9 +25,9 @@ function App() {
       <Router>
         <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
         <Routes>
-          <Route path="/" element={<Homepage total={total} setTotal={setTotal} items={items} setItems={setItems} isLoggedIn={isLoggedIn}/>} />
+          <Route path="/" element={<Homepage items={items} setItems={setItems} isLoggedIn={isLoggedIn}/>} />
           <Route path="/Login" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
-          <Route path="/Checkout" element={<Checkout total={total} setTotal={setTotal} items={items} setItems={setItems}/>} />
+          <Route path="/Checkout" element={<Checkout items={items} setItems={setItems}/>} />
           <Route path="/Orders" element={<Orders />} />
         </Routes>
       </Router>

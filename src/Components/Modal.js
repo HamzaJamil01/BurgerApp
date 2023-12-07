@@ -1,7 +1,8 @@
 import React from 'react';
 import './Modal.css';
-
-const Modal = ({ show, handleClose, handleContinue, items, total }) => {
+import { useSelector } from 'react-redux';
+const Modal = ({ show, handleClose, handleContinue, items}) => {
+  const total = useSelector (state => state.total)
   const showHideClassName = show ? 'modal display-block' : 'modal display-none';
   const displayItems = () => {
     return Object.entries(items).map(([key, value]) => (

@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import './OrderForm.css';
 import { useNavigate } from 'react-router-dom';
-const OrderForm = ({items, total, setTotal, setItems}) => {
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { actionCreators } from '../States/index';
+const OrderForm = ({items, setItems}) => {
+  const total = useSelector (state => state.total);
+  const dispatch = useDispatch();
+  const action = bindActionCreators(actionCreators, dispatch);
   const [formData, setFormData] = useState({
     name: '',
     street: '',
@@ -39,7 +46,7 @@ const OrderForm = ({items, total, setTotal, setItems}) => {
         cheese: 0,
         meat: 0,
       });
-      setTotal(3);
+      action.resetTotal(3);
       navigate('/');
   };
 

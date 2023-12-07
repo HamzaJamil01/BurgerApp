@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import Footer from './Footer';
 import Burger from './Burger';
 
-const Homepage = ({items, total, setTotal, setItems, isLoggedIn}) => {
+const Homepage = ({items, setItems, isLoggedIn}) => {
 
   return (
     <div>
       <Burger items={items} />
-      <Footer total={total} onTotalChange={setTotal} items={items} setItems={setItems} isLoggedIn={isLoggedIn}/>
+      <Footer items={items} setItems={setItems} isLoggedIn={isLoggedIn}/>
     </div>
   );
 };
