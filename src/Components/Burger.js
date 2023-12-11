@@ -1,7 +1,8 @@
 import React from 'react';
 import './Burger.css';
-
-const Burger = ({ items }) => {
+import { useSelector } from 'react-redux';
+const Burger = () => {
+  const items = useSelector(state=> state.items);
   const renderIngredients = () => {
     const ingredients = [];
     for (let ingredient in items) {

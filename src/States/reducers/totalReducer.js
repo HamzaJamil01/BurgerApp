@@ -1,5 +1,4 @@
 const totalReducer = (state = 3, action) => {
-    debugger
 	switch(action.type){
 	case 'decreaseTotal':
 		return state - action.payload;

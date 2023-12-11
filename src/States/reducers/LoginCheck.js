@@ -1,8 +1,7 @@
 const setLogin = (state = false, action) => {
-    debugger
 	switch(action.type){
 	case 'Login':
-		return state = action;
+		return (state = action.payload);
 	default:
 		return state;
 	}

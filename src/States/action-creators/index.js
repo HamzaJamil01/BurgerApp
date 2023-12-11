@@ -30,3 +30,9 @@ export const Login = (LoginCheck) => {
        })
     }
 }
+export const updateIngrediants = (Ingrediants) => {
+    return {
+      type: 'UPDATE_INGREDIANT',
+      payload: Ingrediants,
+    };
+  };

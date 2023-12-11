@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './Login.css';
-
+import { useDispatch } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { actionCreators } from '../States/index';
 import { useNavigate } from "react-router-dom";
 // Function to get users from localStorage
 const getUsers = () => {
@@ -12,7 +14,9 @@ const getUsers = () => {
   const setUsers = (users) => {
     localStorage.setItem('users', JSON.stringify(users));
   };
-const Login = ({isLoggedIn,  setIsLoggedIn}) => {
+const Login = () => {
+  const dispatch = useDispatch();
+  const action = bindActionCreators(actionCreators, dispatch);
   const [signInMode, setSignInMode] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -27,7 +31,7 @@ const Login = ({isLoggedIn,  setIsLoggedIn}) => {
         if (user) {
           user.loggedIn = true;
           setUsers(users);
-          setIsLoggedIn(true);
+          action.Login(true);
           navigate('/Checkout');
         } else {
           setErrorMessage('Invalid email or password');

@@ -6,7 +6,9 @@ import Modal from './Modal';
 import { useSelector, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators } from '../States/index';
-const Footer = ({ items, setItems, isLoggedIn }) => {
+const Footer = () => {
+    const isLoggedIn = useSelector (state => state.isLoggedIn);
+    const items = useSelector (state => state.items);
     const dispatch = useDispatch();
     const action = bindActionCreators(actionCreators, dispatch)
     const total = useSelector (state => state.total)
@@ -35,9 +37,9 @@ const Footer = ({ items, setItems, isLoggedIn }) => {
       default:
         break;
     }
-
+debugger;
     updatedItems[item]++;
-    setItems(updatedItems);
+    action.updateIngrediants(updatedItems);
     action.increaseTotal(priceToAdd);
   };
 
@@ -64,7 +66,7 @@ const Footer = ({ items, setItems, isLoggedIn }) => {
 
     if (updatedItems[item] > 0) {
       updatedItems[item]--;
-      setItems(updatedItems);
+      action.updateIngrediants(updatedItems);
       action.decreaseTotal(priceToSubtract);
     }
   };
@@ -110,7 +112,7 @@ const Footer = ({ items, setItems, isLoggedIn }) => {
                 <button className="signup-btn"disabled={items['lettuce'] === 0 && items['bacon'] === 0 && items['cheese'] === 0 && items['meat'] === 0 } onClick={handleClick}>Signup to Order</button>
             }
         </div>
-        <Modal show={showModal} handleClose={handleCloseModal} handleContinue={handleContinue} items={items} />
+        <Modal show={showModal} handleClose={handleCloseModal} handleContinue={handleContinue} />
       </div>
     </footer>
   );

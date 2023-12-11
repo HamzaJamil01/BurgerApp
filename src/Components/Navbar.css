@@ -61,13 +61,13 @@
 .nav-link {
   text-decoration: none;
   color: #fff;
-  padding: 10px; /* Added padding for a larger clickable area */
-  display: block; /* Ensures the link takes up full width */
+  padding: 10px;
+  display: block;
 }
 
 .nav-link:hover,
-.nav-link:active,
-.active-link {
+.active-link,
+.nav-link:active {
   background-color: #8f5c2c;
   border-bottom: 4px solid #40a4c8;
   color: #fff;

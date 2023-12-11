@@ -5,8 +5,9 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators } from '../States/index';
-const OrderForm = ({items, setItems}) => {
+const OrderForm = () => {
   const total = useSelector (state => state.total);
+  const items = useSelector (state => state.items);
   const dispatch = useDispatch();
   const action = bindActionCreators(actionCreators, dispatch);
   const [formData, setFormData] = useState({
@@ -40,7 +41,7 @@ const OrderForm = ({items, setItems}) => {
       let orders = JSON.parse(localStorage.getItem('orders')) || [];
       orders.push(orderData);
       localStorage.setItem('orders', JSON.stringify(orders));
-      setItems({
+      action.updateIngrediants({
         lettuce: 0,
         bacon: 0,
         cheese: 0,

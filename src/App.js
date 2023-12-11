@@ -13,21 +13,14 @@ import Checkout from './Components/Checkout';
 import Orders from './Components/Orders';
 
 function App() {
-  const [items, setItems] = useState({
-    lettuce: 0,
-    bacon: 0,
-    cheese: 0,
-    meat: 0,
-  });
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
     <div className="App">
       <Router>
-        <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
+        <Navbar/>
         <Routes>
-          <Route path="/" element={<Homepage items={items} setItems={setItems} isLoggedIn={isLoggedIn}/>} />
-          <Route path="/Login" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
-          <Route path="/Checkout" element={<Checkout items={items} setItems={setItems}/>} />
+          <Route path="/" element={<Homepage/>} />
+          <Route path="/Login" element={<Login />} />
+          <Route path="/Checkout" element={<Checkout/>} />
           <Route path="/Orders" element={<Orders />} />
         </Routes>
       </Router>

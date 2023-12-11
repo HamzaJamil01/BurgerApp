@@ -1,13 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { Link, NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import './Navbar.css';
-
-const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
+import { useDispatch } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { actionCreators } from '../States/index';
+import { useSelector } from 'react-redux';
+const Navbar = () => {
   const [showLinks, setShowLinks] = useState(false);
-
+  const dispatch = useDispatch();
+  const action = bindActionCreators(actionCreators, dispatch);
+  const isLoggedIn = useSelector (state => state.isLoggedIn);  
+  const [activeLink, setActiveLink] = useState('');
+  const location = useLocation();
   useEffect(() => {
-    setIsLoggedIn(checkLogin());
-  }, []);
+    setActiveLink(location.pathname);
+  }, [location]);
+  useEffect(() => {
+    action.Login(checkLogin());
+  },[]);
 
   const getUsers = () => {
     const users = localStorage.getItem('users');
@@ -29,7 +39,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
       return user;
     });
     localStorage.setItem('users', JSON.stringify(updatedUsers));
-    setIsLoggedIn(false);
+    action.Login(false);
   };
 
   const toggleLinks = () => {
@@ -49,13 +59,13 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
       <div className={showLinks ? 'links active' : 'links'}>
         <ul>
           <li>
-            <NavLink exact to="/" activeClassName="active-link" className="nav-link">
+            <NavLink to="/" className= {activeLink === "/" ? "active-link" : "nav-link"}>
               Build Burger
             </NavLink>
           </li>
           {isLoggedIn && (
             <li>
-              <NavLink to="/Orders" activeClassName="active-link" className="nav-link">
+              <NavLink to="/Orders" className={activeLink === "/Orders" ? "active-link" : "nav-link" }>
                 Orders
               </NavLink>
             </li>
@@ -64,7 +74,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
             {isLoggedIn ? (
               <button type="button" className="nav-link" onClick={handleLogout}>Logout</button>
             ) : (
-              <NavLink to="/Login" activeClassName="active-link" className="nav-link">
+              <NavLink to="/Login" className={activeLink === "/Login" ? "active-link" : "nav-link"}>
                 Login
               </NavLink>
             )}
