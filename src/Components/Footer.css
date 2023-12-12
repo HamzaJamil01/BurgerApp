@@ -19,15 +19,6 @@
     align-items: center;
     justify-content: space-between;
   }
-  /* button {
-    border: 1px solid;
-    border-color: black;
-    font-size: medium;
-    color: white;
-    cursor: pointer;
-    display: table;
-    width: 100px;
-  } */
   .btn {
     display: block;
     font: inherit;
@@ -51,30 +42,8 @@
     padding: 15px 30px;
     box-shadow: 2px 2px 2px #966909;
   }
-  
-  /* Style the buttons on hover */
-  .more:hover {
-    background-color: #99703f;
-    color: #fff;
-  }
-  .less:hover {
-    background-color: #d39952;
-    color: #fff;
-  }
   .signup-btn:hover {
     background-color: #a0db41;
     border: 1px solid #966909;
     color: #966909;
-  }
-  .less  {
-    background-color: #d39952;
-  }
-  .more {
-    background-color: #8f5e1e;
-  }
-  .less:disabled{
-    background-color: #ac9980;
-    border: 1px solid #7e7365;
-    color: #ccc;
-    cursor: default;
   }

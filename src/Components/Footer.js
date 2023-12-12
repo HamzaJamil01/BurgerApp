@@ -6,6 +6,7 @@ import Modal from './Modal';
 import { useSelector, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators } from '../States/index';
+import { LessButton, StyledButton } from './FooterButton';
 const Footer = () => {
     const isLoggedIn = useSelector (state => state.isLoggedIn);
     const items = useSelector (state => state.items);
@@ -37,7 +38,6 @@ const Footer = () => {
       default:
         break;
     }
-debugger;
     updatedItems[item]++;
     action.updateIngrediants(updatedItems);
     action.increaseTotal(priceToAdd);
@@ -87,23 +87,23 @@ debugger;
         </div>
         <div className="footer-section">
           <h3>Lettuce</h3>
-          <button className="btn less" onClick={() => handleLess('lettuce')} disabled={items['lettuce'] === 0}>Less</button>
-          <button className="btn more" onClick={() => handleMore('lettuce')}>More</button>
+          <LessButton btnmode="less" onClick={() => handleLess('lettuce')} disabled={items['lettuce'] === 0}>Less</LessButton>
+          <StyledButton btnmode="more" onClick={() => handleMore('lettuce')}>More</StyledButton>
         </div>
         <div className="footer-section">
           <h3>Bacon</h3>
-          <button className="btn less" onClick={() => handleLess('bacon')} disabled={items['bacon'] === 0}>Less</button>
-          <button className="btn more" onClick={() => handleMore('bacon')}>More</button>
+          <LessButton btnmode="less" onClick={() => handleLess('bacon')} disabled={items['bacon'] === 0}>Less</LessButton>
+          <StyledButton btnmode="more" onClick={() => handleMore('bacon')}>More</StyledButton>
         </div>
         <div className="footer-section">
           <h3>Cheese</h3>
-          <button className="btn less" onClick={() => handleLess('cheese')} disabled={items['cheese'] === 0}>Less</button>
-          <button className="btn more" onClick={() => handleMore('cheese')}>More</button>
+          <LessButton btnmode="less" onClick={() => handleLess('cheese')} disabled={items['cheese'] === 0}>Less</LessButton>
+          <StyledButton btnmode="more" onClick={() => handleMore('cheese')}>More</StyledButton>
         </div>
         <div className="footer-section">
           <h3>Meat</h3>
-          <button className="btn less" onClick={() => handleLess('meat')} disabled={items['meat'] === 0}>Less</button>
-          <button className="btn more" onClick={() => handleMore('meat')}>More</button>
+          <LessButton btnmode="less" onClick={() => handleLess('meat')} disabled={items['meat'] === 0}>Less</LessButton>
+          <StyledButton btnmode="more" onClick={() => handleMore('meat')}>More</StyledButton>
         </div>
         <div className="footer-section">
             {isLoggedIn ? 
