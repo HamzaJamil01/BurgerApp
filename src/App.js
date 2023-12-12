@@ -11,6 +11,7 @@ import {
 } from "react-router-dom";
 import Checkout from './Components/Checkout';
 import Orders from './Components/Orders';
+import CrudComponent from './Components/Crud';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Navbar/>
         <Routes>
           <Route path="/" element={<Homepage/>} />
+          <Route path="Crud" element={<CrudComponent/>} />
           <Route path="/Login" element={<Login />} />
           <Route path="/Checkout" element={<Checkout/>} />
           <Route path="/Orders" element={<Orders />} />
